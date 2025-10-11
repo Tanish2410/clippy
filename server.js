@@ -14,7 +14,7 @@ app.use(express.static('public'));
 // Endpoint to get drawing prompt from OpenAI
 app.post('/get-prompt', async (req, res) => {
   try {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('https://clippy-0fnx.onrender.com/get-prompt', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
