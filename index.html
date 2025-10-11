@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>p5.js Paint Application (Layers)</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      max-width: 980px;
+      width: 100%;
+    }
+    h1 { text-align: center; color: #333; margin-bottom: 20px; }
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px 16px;
+      margin-bottom: 16px;
+      padding: 12px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      align-items: center;
+    }
+    .control-group { display: flex; align-items: center; gap: 8px; }
+    .control-group > label { font-weight: bold; color: #555; white-space: nowrap; }
+    button {
+      padding: 8px 14px;
+      border: none; border-radius: 6px;
+      background: #007bff; color: white;
+      cursor: pointer; font-size: 14px;
+      transition: background 0.2s;
+    }
+    button:hover { background: #005fcb; }
+    button.clear { background: #dc3545; }
+    button.clear:hover { background: #c82333; }
+    button.save { background: #28a745; }
+    button.save:hover { background: #218838; }
+    input[type="color"] { width: 46px; height: 36px; border: none; border-radius: 6px; cursor: pointer; }
+    input[type="range"] { width: 120px; }
+    #canvas-container {
+      display: flex; justify-content: center;
+      background: #f8f9fa; padding: 20px; border-radius: 10px; border: 2px dashed #dee2e6;
+    }
+    .instructions { text-align: center; margin-top: 12px; color: #666; font-style: italic; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎨 p5.js Paint Application (Layers)</h1>
+
+    <div class="controls">
+      <div class="control-group">
+        <label>Brush Color:</label>
+        <input type="color" id="colorPicker" value="#000000">
+      </div>
+
+      <div class="control-group">
+        <label>Brush Size:</label>
+        <input type="range" id="brushSize" min="1" max="50" value="10">
+        <span id="brushSizeValue">10</span>
+      </div>
+
+      <div class="control-group">
+        <label>Tool:</label>
+        <select id="toolSelect">
+          <option value="brush">Brush</option>
+          <option value="eraser">Eraser</option>
+          <option value="spray">Spray</option>
+          <option value="line">Line</option>
+          <option value="rectangle">Rectangle</option>
+          <option value="circle">Circle</option>
+          <option value="text">Text</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label>Text:</label>
+        <input id="textInput" type="text" placeholder="Type here…">
+      </div>
+
+      <div class="control-group">
+        <label>Text Size:</label>
+        <input type="range" id="textSize" min="8" max="96" value="24">
+        <span id="textSizeValue">24</span>
+      </div>
+
+      <div class="control-group">
+        <label>Background:</label>
+        <input type="color" id="bgColorPicker" value="#ffffff" title="Pick background">
+      </div>
+
+      <!-- Layers UI -->
+      <div class="control-group">
+        <label>Layer:</label>
+        <select id="layerSelect" title="Active layer"></select>
+        <button id="newLayerBtn" title="Add a new layer">+ Layer</button>
+      </div>
+
+      <div class="control-group">
+        <button id="clearBtn" class="clear" title="Clear active layer">Clear Layer</button>
+        <button id="saveBtn" class="save">Save Drawing</button>
+      </div>
+    </div>
+
+    <div id="canvas-container"></div>
+    <p class="instructions">
+      Draw across multiple layers. Use the Layer dropdown to switch which layer you’re painting on. Undo/Redo act on the active layer.
+    </p>
+  </div>
+
+  <script src="sketch.js"></script>
+</body>
+</html>
