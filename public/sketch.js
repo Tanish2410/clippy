@@ -425,3 +425,25 @@ function keyPressed() {
     return false;
   }
 }
+
+// === Serverless Prompt Fetch Function ===
+async function getPrompt() {
+  try {
+    const response = await fetch("/api/get-prompt", { method: "POST" });
+    const data = await response.json();
+
+    const promptEl = document.getElementById("gamePrompt") || document.getElementById("prompt");
+    if (data.prompt) {
+      const promptText = `Draw: ${data.prompt}`;
+      if (promptEl) promptEl.innerText = promptText;
+      console.log(promptText);
+    } else {
+      if (promptEl) promptEl.innerText = "Error: could not get prompt.";
+      console.error("No prompt in response:", data);
+    }
+  } catch (err) {
+    console.error("Error fetching prompt:", err);
+    const promptEl = document.getElementById("gamePrompt") || document.getElementById("prompt");
+    if (promptEl) promptEl.innerText = "Error fetching prompt.";
+  }
+}
