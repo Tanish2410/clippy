@@ -125,7 +125,7 @@ function setupEventListeners() {
     promptEl.textContent = 'Getting a prompt…';
     try {
       // Uses your server endpoint which calls OpenAI and returns { prompt }.
-      const res = await fetch('/get-prompt', { method: 'POST' });
+      const res = await fetch('/api/get-prompt', { method: 'POST' });
       const data = await res.json();
       if (!res.ok || !data?.prompt) {
         throw new Error(data?.error || 'Failed to get prompt');
